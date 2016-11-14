@@ -19,6 +19,7 @@ class PhotoList(ListView):
     model = Photo
     paginate_by = 3
     context_object_name = 'photos'
+    queryset = Photo.objects.order_by('-created_date')
 
 
 @method_decorator(login_required, name='dispatch')

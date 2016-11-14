@@ -8,6 +8,9 @@
     <title>Document</title>
 </head>
 <body>
+<a href="{% url 'photo:photo_add' %}">
+    사진 추가
+</a>
     {% for photo in photos %}
         <p>{{ photo.content }}</p>
         <img src="{{ photo.image.thumbnail.300x300 }}" alt="">

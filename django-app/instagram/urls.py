@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(apis_patterns)),
     url(r'^photo/', include('photo.urls.views', namespace='photo')),
+    url(r'^auth/', include('django.contrib.auth.urls', namespace='auth'))
 ]
 
 if settings.DEBUG:

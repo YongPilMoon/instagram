@@ -62,6 +62,7 @@ class PhotoComment(models.Model):
         }
         return ret
 
+
 class PhotoLike(models.Model):
     photo = models.ForeignKey(Photo)
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
