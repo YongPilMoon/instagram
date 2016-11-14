@@ -2,9 +2,11 @@ import json
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+
 from .models import Photo, PhotoComment
 
 User = get_user_model()
+
 
 @csrf_exempt
 def photo_list(request):
@@ -38,6 +40,7 @@ def photo_add(request):
         json.dumps(photo.to_dict()),
         content_type='application/json'
     )
+
 
 @csrf_exempt
 def comment_add(request, photo_pk):

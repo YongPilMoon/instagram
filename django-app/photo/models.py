@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from versatileimagefield.fields import VersatileImageField
 
 __all__ =[
@@ -21,6 +22,9 @@ class Photo(models.Model):
         through='PhotoLike',
         related_name='user_set_like_users'
     )
+
+    def get_absolute_url(self):
+        return reverse('photo:photo_list')
 
     def __str__(self):
         return '%s (author:%s)' % (
