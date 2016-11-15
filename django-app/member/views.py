@@ -1,9 +1,11 @@
 from django.http import HttpResponse
 from django.contrib.auth import authenticate as auth_authenticate
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import FormView
+from django.views.generic import View
 
 from member.forms import LoginForm
 
@@ -45,3 +47,10 @@ class Login(FormView):
         else:
             return HttpResponse('로그인 실패 하였습니다.')
         return super().form_valid(form)
+
+
+class Logout(View):
+    def get(self, request, *args, **kwargs):
+        auth_logout(request)
+        return redirect('photo:photo_list')
+    
