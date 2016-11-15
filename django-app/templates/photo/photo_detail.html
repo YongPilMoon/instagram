@@ -1,0 +1,9 @@
+{% extends 'base/common.html' %}
+{% block content %}
+    <p>{{photo.content}}</p>
+    <img src="{{ photo.image.url }}" alt="">
+    <form action="" method="POST">
+        {{form.as_p}}
+        <button type="sumbit">save</button>
+    </form>
+{% endblock %}
