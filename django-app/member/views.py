@@ -5,7 +5,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
-from member.forms import LoginForm
+from member.forms import LoginForm, SignupForm
+from member.models import MyUser
 
 
 def login_fbv(request):
@@ -45,3 +46,22 @@ class Login(FormView):
         else:
             return HttpResponse('로그인 실패 하였습니다.')
         return super().form_valid(form)
+
+
+class Signup(FormView):
+    template_name = 'member/signup.html'
+    form_class = SignupForm
+    success_url = reverse_lazy('photo:photo_list')
+
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = MyUser.objects.create_user(
+            username=username,
+        )
+        user.set_password(password)
+        user.save()
+        
+        auth_login(self.request, user)
+        return redirect('photo:photo_list')
+
