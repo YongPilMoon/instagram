@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import DetailView
 from django.views.generic.detail import SingleObjectMixin
-from django.views.generic.edit import CreateView, FormView
+from django.views.generic.edit import CreateView, FormView, DeleteView
 from django.views.generic import ListView
 from photo.models import Photo, PhotoComment
 from django import forms
@@ -79,3 +79,8 @@ class PhotoAdd(CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super(PhotoAdd, self).form_valid(form)
+
+
+class PhotoDelete(DeleteView):
+    model = Photo
+    success_url = reverse_lazy('photo:photo_list')
