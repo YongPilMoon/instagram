@@ -2,6 +2,11 @@
 {% block content %}
     <p>{{photo.content}}</p>
     <img src="{{ photo.image.url }}" alt="">
+
+<form action="{% url 'photo:photo_delete' pk=photo.pk %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">삭제하기</button>
+</form>
     <form action="" method="POST">
         {{form.as_p}}
         <button type="sumbit">save</button>
